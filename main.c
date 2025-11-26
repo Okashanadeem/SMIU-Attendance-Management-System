@@ -52,6 +52,7 @@ void markAttendance();           // Records attendance for a student
 void viewStudentDetails();       // Shows detailed info and history for a student
 void generateReport();           // Generates attendance report for all students
 int findStudent(char *id);       // Searches for a student by ID
+float calculateAttendancePercentage(const Student *student); // Calculates a student's attendance percentage
 void displayMenu();              // Shows the main menu
 
 /*
@@ -161,6 +162,29 @@ int findStudent(char *id) {
         }
     }
     return -1;  // Student not found
+}
+
+/*
+ * calculateAttendancePercentage Function
+ * Calculates the attendance percentage for a single student
+ * Parameters:
+ *   student - a constant pointer to the student's record
+ * Returns:
+ *   The calculated attendance percentage, or 0.0 if no records exist
+ */
+float calculateAttendancePercentage(const Student *student) {
+    if (student->attendanceCount == 0) {
+        return 0.0;
+    }
+
+    int attendedClasses = 0;
+    for (int i = 0; i < student->attendanceCount; i++) {
+        if (strcmp(student->attendance[i].status, "Present") == 0 || strcmp(student->attendance[i].status, "Late") == 0) {
+            attendedClasses++;
+        }
+    }
+
+    return ((float)attendedClasses / student->attendanceCount) * 100;
 }
 
 /*
@@ -373,20 +397,21 @@ void viewStudentDetails() {
         return;
     }
     
-    // Calculate attendance statistics
+    // Calculate attendance percentage
+    float attendancePercentage = calculateAttendancePercentage(currentStudent);
+    
+    // Calculate statistics
     int presentCount = 0, absentCount = 0, lateCount = 0;
-    for (int recordIndex = 0; recordIndex < currentStudent->attendanceCount; recordIndex++) {
-        if (strcmp(currentStudent->attendance[recordIndex].status, "Present") == 0) 
+    for (int i = 0; i < currentStudent->attendanceCount; i++) {
+        if (strcmp(currentStudent->attendance[i].status, "Present") == 0) {
             presentCount++;
-        else if (strcmp(currentStudent->attendance[recordIndex].status, "Absent") == 0) 
+        } else if (strcmp(currentStudent->attendance[i].status, "Absent") == 0) {
             absentCount++;
-        else if (strcmp(currentStudent->attendance[recordIndex].status, "Late") == 0) 
+        } else if (strcmp(currentStudent->attendance[i].status, "Late") == 0) {
             lateCount++;
+        }
     }
-    
-    // Calculate attendance percentage (Present + Late = attended)
-    float attendancePercentage = ((float)(presentCount + lateCount) / currentStudent->attendanceCount) * 100;
-    
+
     // Display statistics
     printf("\n  ========== STATISTICS ==========\n");
     printf("  Total Classes: %d\n", currentStudent->attendanceCount);
@@ -434,23 +459,7 @@ void generateReport() {
     // Process each student
     for (int studentIndex = 0; studentIndex < studentCount; studentIndex++) {
         Student *currentStudent = &students[studentIndex];
-        float studentAttendancePercentage = 0;
-        
-        // Calculate attendance percentage if student has records
-        if (currentStudent->attendanceCount > 0) {
-            int presentCount = 0, lateCount = 0;
-            
-            // Count Present and Late statuses
-            for (int recordIndex = 0; recordIndex < currentStudent->attendanceCount; recordIndex++) {
-                if (strcmp(currentStudent->attendance[recordIndex].status, "Present") == 0) 
-                    presentCount++;
-                else if (strcmp(currentStudent->attendance[recordIndex].status, "Late") == 0) 
-                    lateCount++;
-            }
-            
-            // Calculate percentage (Present + Late / Total * 100)
-            studentAttendancePercentage = ((float)(presentCount + lateCount) / currentStudent->attendanceCount) * 100;
-        }
+        float studentAttendancePercentage = calculateAttendancePercentage(currentStudent);
         
         totalAttendancePercentage += studentAttendancePercentage;  // Add to total for average calculation
         
