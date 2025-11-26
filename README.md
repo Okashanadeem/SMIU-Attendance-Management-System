@@ -19,7 +19,6 @@ Designed for Windows, using Dev-C++ with the built-in C compiler (version ≥ 5)
 * [Design Notes & Behavior](#design-notes--behavior)
 * [Known Limitations & Edge Cases](#known-limitations--edge-cases)
 * [Future Enhancements / Roadmap](#future-enhancements--roadmap)
-* [Contribution & License](#contribution--license)
 
 ---
 
@@ -76,12 +75,12 @@ All operations are **in-memory** with no file persistence.
                                   ▼
                         ╔════════════════════╗
                         ║  displayMenu()     ║
-                        ║  (clear + prompt)  ║
+                        ║                    ║
                         ╚════════════════════╝
                                   │
                                   ▼
                          ┌──────────────────┐
-                         │  Read choice (1) │
+                         │    Read choice   │
                          └──────────────────┘
                                   │
    ┌──────────────┬───────────────┼───────────────┬───────────────┐
@@ -106,7 +105,7 @@ This is the program loop until the user selects Exit.
 
 ---
 
-### **Student Attendance Management System - Flow Diagram (Textual Layout)**
+### **Student Attendance Management System - Flow Diagram (Explained Textual Layout)**
 
 ```
 [Start]
