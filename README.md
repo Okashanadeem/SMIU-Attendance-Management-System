@@ -1,7 +1,3 @@
-Got it. I’ve revised the README specifically for **Windows using Dev-C++ (built-in C compiler ≥ version 5)**, removed GCC/Linux instructions, removed the sample session, and replaced it with a concise program flow diagram. This will be a clean, professional, ready-to-use README for your project.
-
----
-
 # Student Attendance Management System
 
 A console-based C application to manage students and their attendance efficiently.
@@ -225,16 +221,4 @@ typedef struct {
 
 ---
 
-## Contribution & License
-
-* Fork the project, create a branch, implement features, and submit a pull request
-* MIT License
-
----
-
-📌 **Final Point:**
-This README is tailored for **Windows + Dev-C++**. It documents the program flow, build instructions, data model, and limitations clearly, providing a professional, ready-to-use reference for the project.
-
----
-
-If you want, I can also **add a polished ASCII flow diagram** directly in the console menu style, so the README looks even cleaner for students or instructors. Do you want me to do that?
+**This project is made by a team of 3: Okasha Nadeem, Muhammad Tabish, Syed Muhammad Sarim, under the lead of Okasha Nadeem, as the final project for the Programming Fundamentals class under the guidance of Miss Iqra at SMI University.**
