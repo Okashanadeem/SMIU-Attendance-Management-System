@@ -1,223 +1,145 @@
-# Student Attendance Management System
+# 🎓 Attendance Management System
 
-A console-based C application to manage students and their attendance efficiently.
-Designed for Windows, using Dev-C++ with the built-in C compiler (version ≥ 5).
+A simple, console-based **C** program to manage student attendance in-memory.
+This project is beginner-friendly and demonstrates the use of **structs, arrays, and basic I/O** in C.
 
 ---
 
-## Table of Contents
+## 📌 Table of Contents
 
-* [Project Summary](#project-summary)
-* [Features](#features)
-* [Quick Start](#quick-start)
-
-  * [Requirements](#requirements)
-  * [Build & Run (Windows)](#build--run-windows)
+* [Project Overview](#project-overview)
+* [Key Features](#key-features)
+* [Requirements](#requirements)
+* [How to Run](#how-to-run)
 * [Program Flow](#program-flow)
-* [Data Model](#data-model)
-* [Code Structure & Key Functions](#code-structure--key-functions)
-* [Design Notes & Behavior](#design-notes--behavior)
-* [Known Limitations & Edge Cases](#known-limitations--edge-cases)
-* [Future Enhancements / Roadmap](#future-enhancements--roadmap)
+* [Data Structures](#data-structures)
+* [Function Summary](#function-summary)
+* [Limitations](#limitations)
+* [Future Improvements](#future-improvements)
+* [Project Team](#project-team)
+
+---
+   
+## 📘 Project Overview
+
+This project allows users to:
+
+* Register students (name and ID)
+* Mark attendance (Present or Absent) for a given date
+* View all students
+* View an individual student’s attendance records
+
+All data is stored in **RAM**, with a menu-driven console interface, making it ideal for learning core C programming concepts.
 
 ---
 
-## Project Summary
+## ⭐ Key Features
 
-This system provides instructors with a simple and efficient way to manage student attendance. It stores up to 100 students in memory and up to 365 daily attendance records per student. Each record has a **date** (`YYYY-MM-DD`) and **status** (`Present`, `Absent`, `Late`).
-
-The program uses a text-based menu to:
-
-* Add students
-* Mark attendance
-* View student details
-* Generate class attendance reports
-
-All operations are **in-memory** with no file persistence.
+* Add new students with unique IDs
+* Mark attendance with user-specified date
+* View all registered students
+* View individual student attendance history
+* Menu-driven interface for simple navigation
 
 ---
 
-## Features
+## 🖥 Requirements
 
-* Add student profiles (Name, unique ID, optional Program)
-* Ensure unique Student IDs
-* Mark or update attendance for the current date
-* View a student's attendance history and statistics
-* Generate a class-wide report (attendance % per student and class average)
-* Lightweight and self-contained C implementation for Windows
+* C compiler (tested with GCC, Dev-C++, or MSVC)
+* Windows OS recommended for best experience (uses `system("cls")` for clearing console)
+* Basic console/terminal access
 
 ---
 
-## Quick Start
+## ▶ How to Run
 
-### Requirements
+### Using Dev-C++
 
-* **Windows OS**
-* **Dev-C++ IDE** (built-in C compiler ≥ version 5)
-* Terminal / console (Dev-C++ provides a console automatically)
+1. Create a **New Project → Console Application → C Project**
+2. Add the `.c` file
+3. Press **F9** to compile
+4. Run the program via Dev-C++
 
-### Build & Run (Windows)
+### Using Command Line (GCC)
 
-1. Open Dev-C++
-2. Create a **New Project → Console Application → C Project**
-3. Copy the `main.c` code into the project
-4. Compile (`F9`) and Run (`Ctrl+F10`)
-
-> Dev-C++ will automatically compile using its built-in compiler.
-
----
-
-## Program Flow
-
-```
-                                START
-                                  │
-                                  ▼
-                        ╔════════════════════╗
-                        ║  displayMenu()     ║
-                        ║                    ║
-                        ╚════════════════════╝
-                                  │
-                                  ▼
-                         ┌──────────────────┐
-                         │    Read choice   │
-                         └──────────────────┘
-                                  │
-   ┌──────────────┬───────────────┼───────────────┬───────────────┐
-   │              │               │               │               │
-   ▼              ▼               ▼               ▼               ▼
-[1] Add       [2] View All    [3] Mark     [4] View Student  [5] Generate
-Student       Students        Attendance   Details           Report
-   │              │               │               │               │
-   ▼              │               │               │               │
-Add Student     Print table      Mark flow      View details     Report flow
-   │              │               │               │               │
-   └──────────────┴───────────────┴───────────────┴───────────────┘
-                                  │
-                                  ▼
-                                [6] Exit
-                                  │
-                                  ▼
-                                STOP
+```bash
+gcc -o attendance attendance.c
+./attendance         # Linux/macOS
+attendance.exe       # Windows
 ```
 
-This is the program loop until the user selects Exit.
+---
+
+## 🔄 Program Flow
+
+```
+========== ATTENDANCE MANAGEMENT SYSTEM ==========
+1. Add New Student
+2. View All Students
+3. Mark Attendance
+4. View Student Attendance
+5. Exit
+```
+
+* The program loops until the user selects **Exit**.
+* Users navigate via numeric menu input.
 
 ---
 
-### **Student Attendance Management System - Flow Diagram (Explained Textual Layout)**
-
-```
-[Start]
-   |
-   v
-[Display Menu]
-   |
-   |---> [1. Add New Student] ---> [Input Name, ID, Program] ---> [Check ID uniqueness] ---> [Add Student to Array] ---> [Success Message] ---> [Back to Menu]
-   |
-   |---> [2. View All Students] ---> [Check if Students Exist?] ---> [Display List Table] ---> [Back to Menu]
-   |
-   |---> [3. Mark Attendance] ---> [Input Student ID] ---> [Find Student?]
-         |                                   |
-         |                                   v
-         |                           [Error: Student Not Found] ---> [Back to Menu]
-         |
-         v
-   [Display Current Date] ---> [Select Attendance Status: Present/Absent/Late] ---> [Check if Today Already Marked?]
-         |                                                           |
-         |                                                           v
-         |                                               [Update Existing Record]
-         |
-         v
-   [Add New Record if Not Marked] ---> [Success Message] ---> [Back to Menu]
-   |
-   |---> [4. View Student Details] ---> [Input Student ID] ---> [Find Student?]
-         |                                   |
-         |                                   v
-         |                           [Error: Student Not Found] ---> [Back to Menu]
-         |
-         v
-   [Display Student Info & Attendance Stats] ---> [Display Attendance History] ---> [Back to Menu]
-   |
-   |---> [5. Generate Report] ---> [Check if Students Exist?] ---> [Calculate Individual Attendance %] ---> [Display Class Report] ---> [Back to Menu]
-   |
-   |---> [6. Exit] ---> [Clear Screen] ---> [Display Exit Message] ---> [End]
-```
-
-This flow covers all core functionalities: student management, attendance marking, and reporting.
-
----
-
-## Data Model
-
-**Structures**
+## 🧱 Data Structures
 
 ```c
 typedef struct {
-    char date[15];    // YYYY-MM-DD
-    char status[10];  // Present | Absent | Late
+    char date[15];       // YYYY-MM-DD
+    char status[10];     // "Present" or "Absent"
 } AttendanceRecord;
 
 typedef struct {
-    char name[100];
-    char id[30];
-    char program[50];
-    AttendanceRecord attendance[365];
+    char name[50];
+    char id[20];
+    AttendanceRecord attendance[200];
     int attendanceCount;
 } Student;
+
+Student students[100];
+int studentCount = 0;
 ```
 
-**Constants**
+---
 
-* `MAX_STUDENTS = 100`
-* `MAX_ATTENDANCE = 365`
-* Fixed-size character buffers for simplicity and safety
+## 🧩 Function Summary
+
+| Function                  | Purpose                                   |
+| ------------------------- | ----------------------------------------- |
+| `addStudent()`            | Adds a new student                        |
+| `viewAllStudents()`       | Displays all students                     |
+| `markAttendance()`        | Marks attendance for a student            |
+| `viewStudentAttendance()` | Displays attendance records for a student |
+| `clearScreen()`           | Clears console screen (Windows only)      |
+| `pauseProgram()`          | Pauses execution and waits for user input |
 
 ---
 
-## Code Structure & Key Functions
+## ⚠ Limitations
 
-* `displayMenu()` — displays main menu
-* `clearScreen()` — clears console (`system("cls")`)
-* `pause()` — wait for Enter key
-* `getCurrentDate(char *date)` — retrieves system date (`YYYY-MM-DD`)
-* `findStudent(char *id)` — linear search, returns index or -1
-* `addStudent()` — add new student after uniqueness check
-* `viewAllStudents()` — prints all students in a formatted table
-* `markAttendance()` — mark or update attendance for today
-* `viewStudentDetails()` — print student stats and complete history
-* `generateReport()` — show per-student attendance % and class average
+* All data is **lost on program exit** (no file saving)
+* Maximum **100 students**
+* Maximum **200 attendance records per student**
+* Only supports **Present / Absent** statuses
+* Windows-specific console clear (`system("cls")`)
+* No duplicate ID prevention or date validation
 
 ---
 
-## Design Notes & Behavior
+## 👥 Project Team
 
-* **Attendance % calculation**: `(Present + Late) / Total Classes × 100`
-* **Today's attendance**: updated if already marked
-* **Student IDs**: unique key, must be manually assigned by instructor
-* **All data**: stored in-memory only, lost when program closes
+Developed by a team of three:
+**Okasha Nadeem (Team Lead)**
+**Muhammad Tabish**
+**Syed Muhammad Sarim**
+**Muhammad Yahya Alvi**
 
----
-
-## Known Limitations & Edge Cases
-
-* No persistent storage; all data is temporary
-* Fixed limits: 100 students, 365 attendance entries per student
-* `clearScreen()` works only on Windows (`cls`)
-* Minimal input validation; `scanf` and `fgets` are used
-* Single-threaded; no concurrent access support
+Final project for **Programming Fundamentals** under the guidance of
+**Miss Iqra — SMI University**
 
 ---
-
-## Future Enhancements / Roadmap
-
-* Persistent storage using CSV or binary file
-* Bulk class attendance marking
-* Export reports to CSV or PDF
-* Multi-course support
-* GUI or web interface
-* Input validation improvements
-
----
-
-**This project is made by a team of 3: Okasha Nadeem, Muhammad Tabish, Syed Muhammad Sarim, under the lead of Okasha Nadeem, as the final project for the Programming Fundamentals class under the guidance of Miss Iqra at SMI University.**
