@@ -120,7 +120,8 @@ void viewAllStudents() {
         return;
     }
 
-    for (int i = 0; i < studentCount; i++) {
+    int i;
+    for (i = 0; i < studentCount; i++) {
         printf("%d. %s (ID: %s)\n", i + 1, students[i].name, students[i].id);
     }
 
@@ -146,7 +147,8 @@ void markAttendance() {
 
     // Search student
     int found = -1;
-    for (int i = 0; i < studentCount; i++) {
+    int i;
+    for (i = 0; i < studentCount; i++) {
         if (strcmp(students[i].id, id) == 0) {
             found = i;
             break;
@@ -206,7 +208,8 @@ void viewStudentAttendance() {
 
     // Search student
     int found = -1;
-    for (int i = 0; i < studentCount; i++) {
+    int i;
+    for (i = 0; i < studentCount; i++) {
         if (strcmp(students[i].id, id) == 0) {
             found = i;
             break;
@@ -230,9 +233,10 @@ void viewStudentAttendance() {
         return;
     }
 
-    for (int i = 0; i < s->attendanceCount; i++) {
+    for (i = 0; i < s->attendanceCount; i++) {
         printf("%s : %s\n", s->attendance[i].date, s->attendance[i].status);
     }
 
     pauseProgram();
 }
+
