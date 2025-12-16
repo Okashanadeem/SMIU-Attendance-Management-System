@@ -1,4 +1,4 @@
-# 🎓 Attendance Management System
+# 🎓 Attendance Management System (SMIU)
 
 A simple, console-based **C** program to manage student attendance in-memory.
 This project is beginner-friendly and demonstrates the use of **structs, arrays, and basic I/O** in C.
