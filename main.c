@@ -186,7 +186,8 @@ void markAttendance() {
     s->attendance[s->attendanceCount++] = newRecord;
 
     printf("\nAttendance marked successfully!\n");
-    pauseProgram();
+    if (s->attendanceCount >= MAX_RECORDS) return;
+	pauseProgram();
 }
 
 // View attendance for a specific student
