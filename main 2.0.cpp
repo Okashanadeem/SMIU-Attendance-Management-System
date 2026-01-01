@@ -45,7 +45,7 @@ int main() {
     do {
         clearScreen();
 
-        printf("\n==========  MANAGEMENT SYSTEM ==========\n");
+        printf("\n==========Attendance  MANAGEMENT SYSTEM ==========\n");
         printf("1. Add New Student\n");
         printf("2. View All Students\n");
         printf("3. Mark Attendance\n");
